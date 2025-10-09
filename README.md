@@ -16,7 +16,7 @@ Do **not** use this configuration in production without proper hardening, SSL, a
 ```
 .
 ├── wp-content/          # WordPress content folder (themes, plugins, uploads)
-├── .env                 # Environment variables (copied from env.sample)
+├── env.sample           # Example environment file to copy and rename as `.env`
 ├── .gitignore
 ├── docker-compose.yml   # Main Docker Compose file
 ├── flake.nix            # Nix flake for reproducible dev environment
