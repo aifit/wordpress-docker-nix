@@ -21,6 +21,7 @@ Do **not** use this configuration in production without proper hardening, SSL, a
 ├── docker-compose.yml   # Main Docker Compose file
 ├── flake.nix            # Nix flake for reproducible dev environment
 ├── flake.lock
+├── uploads.ini          # PHP overrides (upload and execution limits)
 └── README.md
 ```
 
@@ -107,7 +108,6 @@ The `docker-compose.yml` mounts several volumes to persist content and override 
 ```yml
 volumes:
   - ./wp-content:/var/www/html/wp-content
-  - ./wp-config.php:/var/www/html/wp-config.php
   - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 ```
 
@@ -116,10 +116,6 @@ volumes:
 `./wp-content:/var/www/html/wp-content`
 
 > If you want to manually add plugins, themes, or upload files for testing.
-
-`./wp-config.php:/var/www/html/wp-config.php`
-
->If you need to modify WordPress configuration directly (for testing custom settings).
 
 `./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini`
 

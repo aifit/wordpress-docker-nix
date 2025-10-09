@@ -3,3 +3,4 @@ wp-content/*
 !wp-content/.gitkeep
 .env
 *.sql
+wp-config.php
