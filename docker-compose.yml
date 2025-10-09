@@ -1,0 +1,31 @@
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: wp_apache
+    restart: always
+    ports:
+      - "${HOST_PORT}:80"
+    environment:
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+      - ./wp-config.php:/var/www/html/wp-config.php
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+
+  db:
+    image: mariadb:10.11
+    container_name: wp_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
