@@ -101,7 +101,7 @@ http://localhost:8081
 
 ### 💡 Note
 
-Sometimes after starting containers, you might see `Error establishing a database connection` when opening `http://localhost:8081`. If this happens, just try to refresh the page.
+If after running `docker-compose up -d` you see the message *“Error establishing a database connection”* when accessing `http://localhost:8081`, this is usually caused by a delay in the database container initialization. Try waiting a few seconds and then accessing the page again. If the problem persists, make sure the database credentials in the `.env` file match those configured in the MariaDB container.
 
 ---
 
