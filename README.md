@@ -99,6 +99,10 @@ After startup, WordPress should be available at:
 http://localhost:8081
 ```
 
+### 💡 Note
+
+Sometimes after starting containers, you might see `Error establishing a database connection` when opening `http://localhost:8081`. If this happens, just try to refresh the page.
+
 ---
 
 🗃️ Volumes
