@@ -54,7 +54,9 @@ MYSQL_ROOT_PASSWORD=root_password
 
 ---
 
-## 🧰 Option 1: Using Nix (Recommended for macOS/Linux)
+### 2. Start WordPress Containers
+
+#### Option 1: Using Nix
 
 If you use **Nix** with Flakes enabled:
 
@@ -70,7 +72,7 @@ Then start your environment:
 docker-compose up -d
 ```
 
-### Notes for macOS
+##### Notes for macOS
 
 If using Colima (for Docker runtime):
 
@@ -80,7 +82,7 @@ colima start --cpu 2 --memory 4 --disk 15
 
 ---
 
-## 🐳 Option 2: Using Docker Directly
+#### Option 2: Using Docker Directly
 
 Make sure Docker is installed and running, then simply run:
 
@@ -99,13 +101,13 @@ After startup, WordPress should be available at:
 http://localhost:8081
 ```
 
-### 💡 Note
+##### Note
 
 If after running `docker-compose up -d` you see the message *“Error establishing a database connection”* when accessing `http://localhost:8081`, this is usually caused by a delay in the database container initialization. Try waiting a few seconds and then accessing the page again. If the problem persists, make sure the database credentials in the `.env` file match those configured in the MariaDB container.
 
 ---
 
-🗃️ Volumes
+## 🗃️ Volumes
 
 The `docker-compose.yml` mounts several volumes to persist content and override configuration files:
 
@@ -137,6 +139,12 @@ docker-compose down -v
 
 ---
 
-📜 License
+## 🎬 Demo Video (YouTube)
+
+Coming soon ...
+
+---
+
+## 📜 License
 
 MIT — free to use, modify, and distribute.
