@@ -141,7 +141,13 @@ docker-compose down -v
 
 ## 🎬 Demo Video (YouTube)
 
-Coming soon ...
+### Install WordPress with Docker on WSL2 (Ubuntu)
+
+[![Watch the video](https://img.youtube.com/vi/ubojv4NQXtY/hqdefault.jpg)](https://youtu.be/ubojv4NQXtY)
+
+### Install WordPress with Docker on macOS (Colima)
+
+[![Watch the video](https://img.youtube.com/vi/ubojv4NQXtY/hqdefault.jpg)](https://youtu.be/ubojv4NQXtY)
 
 ---
 

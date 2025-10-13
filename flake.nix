@@ -38,22 +38,12 @@
             echo ""
             if [[ "$(uname)" == "Darwin" ]]; then
               echo -e " Detected system: \e[32mmacOS\e[0m"
-              echo ""
-              echo " Start Colima with resources, e.g.:"
-              echo -e " $ \e[36mcolima start --cpu 2 --memory 4 --disk 15\e[0m"
-              echo ""
-              echo " Then run:"
-              echo -e " $ \e[36mdocker-compose up -d\e[0m"
-              echo ""
             else
-              echo ""
-              echo " Detected system: Linux"
-              echo " Make sure Docker daemon is running:"
-              echo -e " $\e[36m sudo systemctl start docker \e[0m"
-              echo " Then run:"
-              echo -e " $ \e[36mdocker-compose up -d\e[0m"
-              echo ""
+              echo " Detected system: \e[32mLinux\e[0m"
             fi
+            echo ""
+            echo -e " 🎬 See the demo video:"
+            echo -e "   \e[34mhttps://github.com/aifit/wordpress-docker-nix/blob/main/README.md#-demo-video-youtube\e[0m"
             echo ""
           '';
         };
