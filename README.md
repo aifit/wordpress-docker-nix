@@ -58,13 +58,17 @@ MYSQL_ROOT_PASSWORD=root_password
 
 #### Option 1: Using Nix
 
-If you use **Nix** with Flakes enabled:
+If you use **Nix** with Flakes enabled (recommended if you already use Nix):
 
 ```bash
 nix develop
 ```
 
-This will open a shell with Docker, Docker Compose, and (on macOS) Colima preinstalled.
+This opens a shell with docker and docker-compose available. On macOS, colima is included in the Nix shell, start it manually if you use it as the Docker runtime:
+
+```
+colima start --cpu 2 --memory 4 --disk 15
+```
 
 Then start your environment:
 
@@ -72,12 +76,10 @@ Then start your environment:
 docker-compose up -d
 ```
 
-##### Notes for macOS
+After startup, access WordPress at:
 
-If using Colima (for Docker runtime):
-
-```bash
-colima start --cpu 2 --memory 4 --disk 15
+```
+http://localhost:8081
 ```
 
 ---
@@ -95,7 +97,7 @@ This will start two containers:
 * `wordpress` (Apache + PHP)
 * `db` (MariaDB 10.11)
 
-After startup, WordPress should be available at:
+After startup, access WordPress at:
 
 ```
 http://localhost:8081
@@ -141,13 +143,13 @@ docker-compose down -v
 
 ## 🎬 Demo Video (YouTube)
 
-### Install WordPress with Docker on WSL2 (Ubuntu)
+### Install WordPress with Docker (Directly on WSL2 / Ubuntu)
 
-[![Watch the video](https://img.youtube.com/vi/ubojv4NQXtY/hqdefault.jpg)](https://youtu.be/ubojv4NQXtY)
+[![Watch the video](https://img.youtube.com/vi/[video_id]/hqdefault.jpg)](https://youtu.be/[video_id])
 
-### Install WordPress with Docker on macOS (Colima)
+### Install WordPress with Docker using Nix (on macOS with Colima)
 
-[![Watch the video](https://img.youtube.com/vi/ubojv4NQXtY/hqdefault.jpg)](https://youtu.be/ubojv4NQXtY)
+[![Watch the video](https://img.youtube.com/vi/[video_id]/hqdefault.jpg)](https://youtu.be/[video_id])
 
 ---
 
