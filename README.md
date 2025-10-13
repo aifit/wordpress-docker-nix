@@ -149,7 +149,7 @@ docker-compose down -v
 
 ### Install WordPress with Docker (Directly on WSL2 / Ubuntu)
 
-[![Watch the video](https://img.youtube.com/vi/[video_id]/hqdefault.jpg)](https://youtu.be/[video_id])
+[![Watch the video](https://img.youtube.com/vi/8icS_YbJJjY/hqdefault.jpg)](https://youtu.be/8icS_YbJJjY)
 
 ---
 
