@@ -64,7 +64,7 @@ If you use **Nix** with Flakes enabled (recommended if you already use Nix):
 nix develop
 ```
 
-This opens a shell with docker and docker-compose available. On macOS, colima is included in the Nix shell, start it manually if you use it as the Docker runtime:
+This opens a shell with `docker` and `docker-compose` available. On macOS, `colima` is included in the Nix shell, start it manually if you use it as the Docker runtime:
 
 ```
 colima start --cpu 2 --memory 4 --disk 15
