@@ -145,7 +145,7 @@ docker-compose down -v
 
 ### Install WordPress with Docker using Nix (on macOS with Colima)
 
-[![Watch the video](https://img.youtube.com/vi/[video_id]/hqdefault.jpg)](https://youtu.be/[video_id])
+[![Watch the video](https://img.youtube.com/vi/_ubAWrfAJb0/hqdefault.jpg)](https://youtu.be/_ubAWrfAJb0)
 
 ### Install WordPress with Docker (Directly on WSL2 / Ubuntu)
 
