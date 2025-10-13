@@ -143,11 +143,11 @@ docker-compose down -v
 
 ## 🎬 Demo Video (YouTube)
 
-### Install WordPress with Docker (Directly on WSL2 / Ubuntu)
+### Install WordPress with Docker using Nix (on macOS with Colima)
 
 [![Watch the video](https://img.youtube.com/vi/[video_id]/hqdefault.jpg)](https://youtu.be/[video_id])
 
-### Install WordPress with Docker using Nix (on macOS with Colima)
+### Install WordPress with Docker (Directly on WSL2 / Ubuntu)
 
 [![Watch the video](https://img.youtube.com/vi/[video_id]/hqdefault.jpg)](https://youtu.be/[video_id])
 
