@@ -58,13 +58,17 @@ MYSQL_ROOT_PASSWORD=root_password
 
 #### Option 1: Using Nix
 
-If you use **Nix** with Flakes enabled:
+If you use **Nix** with Flakes enabled (recommended if you already use Nix):
 
 ```bash
 nix develop
 ```
 
-This will open a shell with Docker, Docker Compose, and (on macOS) Colima preinstalled.
+This opens a shell with `docker` and `docker-compose` available. On macOS, `colima` is included in the Nix shell, start it manually if you use it as the Docker runtime:
+
+```
+colima start --cpu 2 --memory 4 --disk 15
+```
 
 Then start your environment:
 
@@ -72,12 +76,10 @@ Then start your environment:
 docker-compose up -d
 ```
 
-##### Notes for macOS
+After startup, access WordPress at:
 
-If using Colima (for Docker runtime):
-
-```bash
-colima start --cpu 2 --memory 4 --disk 15
+```
+http://localhost:8081
 ```
 
 ---
@@ -95,13 +97,13 @@ This will start two containers:
 * `wordpress` (Apache + PHP)
 * `db` (MariaDB 10.11)
 
-After startup, WordPress should be available at:
+After startup, access WordPress at:
 
 ```
 http://localhost:8081
 ```
 
-##### Note
+Notes:
 
 If after running `docker-compose up -d` you see the message *“Error establishing a database connection”* when accessing `http://localhost:8081`, this is usually caused by a delay in the database container initialization. Try waiting a few seconds and then accessing the page again. If the problem persists, make sure the database credentials in the `.env` file match those configured in the MariaDB container.
 
@@ -141,7 +143,13 @@ docker-compose down -v
 
 ## 🎬 Demo Video (YouTube)
 
-Coming soon ...
+### Install WordPress with Docker using Nix (on macOS with Colima)
+
+[![Watch the video](https://img.youtube.com/vi/_ubAWrfAJb0/hqdefault.jpg)](https://youtu.be/_ubAWrfAJb0)
+
+### Install WordPress with Docker (Directly on WSL2 / Ubuntu)
+
+[![Watch the video](https://img.youtube.com/vi/8icS_YbJJjY/hqdefault.jpg)](https://youtu.be/8icS_YbJJjY)
 
 ---
 
