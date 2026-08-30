@@ -153,6 +153,13 @@ volumes:
 
 And remove (or comment out) `wp_content_data` from the `volumes` section at the bottom.
 
+Then restart the containers to apply the new config:
+
+```bash
+docker-compose down        # stop containers (do NOT use -v, or the named volume will be deleted)
+docker-compose up -d       # restart with the new bind mount config
+```
+
 Now `./wp-content` on your host is synced directly into the container — edit themes/plugins locally and changes reflect immediately.
 
 ---
