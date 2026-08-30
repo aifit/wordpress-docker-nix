@@ -15,7 +15,7 @@ Do **not** use this configuration in production without proper hardening, SSL, a
 
 ```
 .
-├── wp-content/          # WordPress content folder (themes, plugins, uploads)
+├── wp-content/          # WordPress content folder (themes, plugins, uploads) — copy from container, see below
 ├── env.sample           # Example environment file to copy and rename as `.env`
 ├── .gitignore
 ├── docker-compose.yml   # Main Docker Compose file
@@ -111,23 +111,49 @@ If after running `docker-compose up -d` you see the message *“Error establishi
 
 ## 🗃️ Volumes
 
-The `docker-compose.yml` mounts several volumes to persist content and override configuration files:
+The `docker-compose.yml` uses the following volumes:
 
 ```yml
 volumes:
-  - ./wp-content:/var/www/html/wp-content
+  - wp_content_data:/var/www/html/wp-content
   - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 ```
 
 ### Explanation
 
-`./wp-content:/var/www/html/wp-content`
+`wp_content_data:/var/www/html/wp-content`
 
-> If you want to manually add plugins, themes, or upload files for testing.
+> A **named Docker volume** that persists `wp-content` (themes, plugins, uploads) across container restarts. Using a named volume (instead of a bind mount) ensures WordPress can correctly populate the folder from the image on first run — a bind mount with an empty local folder would override and wipe the container's content.
 
 `./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini`
 
 > If you want to adjust PHP upload or memory limits during testing.
+
+---
+
+## 🛠 Local Theme & Plugin Development
+
+To develop themes or plugins locally, you need to first extract `wp-content` from the running container to your host:
+
+```bash
+# 1. Start the containers first
+docker-compose up -d
+
+# 2. Copy wp-content from the container to your local folder
+docker cp wp_apache:/var/www/html/wp-content ./
+```
+
+Then update `docker-compose.yml` to use a bind mount instead of the named volume:
+
+```yml
+volumes:
+  - ./wp-content:/var/www/html/wp-content   # bind mount for local dev
+  - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+```
+
+And remove (or comment out) `wp_content_data` from the `volumes` section at the bottom.
+
+Now `./wp-content` on your host is synced directly into the container — edit themes/plugins locally and changes reflect immediately.
 
 ---
 
