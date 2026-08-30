@@ -15,7 +15,7 @@ Do **not** use this configuration in production without proper hardening, SSL, a
 
 ```
 .
-├── wp-content/          # WordPress content folder (themes, plugins, uploads)
+├── wp-content/          # WordPress content folder (themes, plugins, uploads) — see Local Theme & Plugin Development below
 ├── env.sample           # Example environment file to copy and rename as `.env`
 ├── .gitignore
 ├── docker-compose.yml   # Main Docker Compose file
@@ -103,41 +103,85 @@ After startup, access WordPress at:
 http://localhost:8081
 ```
 
-Notes:
-
-If after running `docker-compose up -d` you see the message *“Error establishing a database connection”* when accessing `http://localhost:8081`, this is usually caused by a delay in the database container initialization. Try waiting a few seconds and then accessing the page again. If the problem persists, make sure the database credentials in the `.env` file match those configured in the MariaDB container.
+> **Note:** If you see *"Error establishing a database connection"* right after startup, wait a few seconds and refresh — the database container may still be initializing. If the error persists, double-check that the credentials in `.env` match those configured in the MariaDB container.
 
 ---
 
 ## 🗃️ Volumes
 
-The `docker-compose.yml` mounts several volumes to persist content and override configuration files:
+The `docker-compose.yml` uses the following volumes:
 
 ```yml
 volumes:
-  - ./wp-content:/var/www/html/wp-content
+  - wp_content_data:/var/www/html/wp-content
   - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 ```
 
 ### Explanation
 
-`./wp-content:/var/www/html/wp-content`
+`wp_content_data:/var/www/html/wp-content`
 
-> If you want to manually add plugins, themes, or upload files for testing.
+> A **named Docker volume** that persists `wp-content` (themes, plugins, uploads) across container restarts. Using a named volume (instead of a bind mount) ensures WordPress can correctly populate the folder from the image on first run — a bind mount with an empty local folder would override and wipe the container's content.
 
 `./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini`
 
-> If you want to adjust PHP upload or memory limits during testing.
+> Lets you adjust PHP upload or memory limits during testing.
+
+---
+
+## 🛠 Local Theme & Plugin Development
+
+By default, `wp-content` lives inside a named Docker volume (`wp_content_data`). To develop themes or plugins locally with live file sync, you need to switch to a **bind mount** instead.
+
+### Step 1 — Extract `wp-content` from the container
+
+The `./wp-content` folder in this repo is intentionally empty. A direct bind mount to an empty folder would break WordPress. Start the containers first to let Docker populate `wp-content` via the named volume, then copy it to your host:
+
+```bash
+docker-compose up -d
+docker cp wp_apache:/var/www/html/wp-content ./
+```
+
+### Step 2 — Switch to a bind mount
+
+Update `docker-compose.yml` to replace the named volume with a bind mount:
+
+```yml
+volumes:
+  - ./wp-content:/var/www/html/wp-content   # bind mount for local dev
+  - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+```
+
+Also remove (or comment out) `wp_content_data` from the `volumes` section at the bottom of the file:
+
+```yml
+volumes:
+  db_data:
+  # wp_content_data:   # no longer needed
+```
+
+### Step 3 — Restart the containers
+
+> ⚠️ **Do NOT use `docker-compose down -v` here.** The `-v` flag deletes all named volumes, including `db_data`, which would wipe your database. Use plain `down` instead.
+
+```bash
+docker-compose down       # stop containers, keep volumes intact
+docker-compose up -d      # restart with the bind mount applied
+```
+
+Now `./wp-content` on your host is synced directly into the container — edit themes or plugins locally and changes reflect immediately.
 
 ---
 
 ## 🧹 Cleanup
 
-To stop and remove containers, volumes, and networks:
+To stop and remove containers, networks, and all volumes:
 
 ```bash
 docker-compose down -v
 ```
+
+> ⚠️ This will permanently delete all data including the database. Make sure you've already extracted `wp-content` to your host before running this.
 
 ---
 
